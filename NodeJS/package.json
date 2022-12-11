@@ -1,0 +1,20 @@
+{
+  "name": "new-folder",
+  "version": "1.0.0",
+  "description": "our first node.js server",
+  "main": "server.js",
+  "dependencies": {
+    "npm": "^8.19.2",
+    "corepack": "^0.14.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/Gupta0Kaustubh/first-server.git)"
+  },
+  "author": "kaustubh",
+  "license": "ISC"
+}
