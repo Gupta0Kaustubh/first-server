@@ -36,14 +36,37 @@ http
           console.log(err);
         }).on('data', (chunk) => {
           body += chunk;    // body = body + chunk;
-          console.log(chunk);
+          // console.log(chunk);
         }).on('end', () => {
           body = JSON.parse(body);
-          console.log("Body data : ", body);
+          // console.log("Body data : ", body);
+          let newToDo = toDoList;
+          newToDo.push(body.item);
+          console.log(newToDo);
+          res.writeHead(201);
         });
-      } else {
-        res.writeHead(501);
-      }
+        }  else if (method === "DELETE") {
+        let body = '';
+        req.on('error', (err) => {
+          console.log(err);
+        })
+          .on('data', (chunk) => {
+            body += chunk;
+          })
+          .on('end', () => {
+            body = JSON.parse(body);
+            let deleteItem = body.item;
+            for (let i = 0; i < toDoList.length; i++) {
+              if (toDoList[i] === deleteItem) {
+                toDoList.splice(i, 1);
+                break;
+              }
+            }
+            res.writeHead(204);
+          })
+           }  else {
+                 res.writeHead(501);
+              }
     }
     else {
       res.writeHead(404);
@@ -74,3 +97,27 @@ http
 
 // POSTMAN api
 // INSOMNIA api
+
+
+// SSR (Server Side Rendered) --> 
+/*
+  url : http://localhost:8081/todos (req)
+  Server Side Data (res)
+  html, css, JS
+  refresh everytime (drawback)
+  slow
+  not user-friendly
+  all the front-end related computation happens on server side
+*/
+
+// CSR (Client Side Rendered) --> 
+/*
+  url : http://localhost:8081 (req)
+  Server Side Data (res)
+  html, css, JS(tons of js operations would be carried here)
+  all the front-end related computation happens on client side
+  won't refresh
+  faster
+  low cost of server(bcoz we are not raising a new request for every reload)
+  
+*/
